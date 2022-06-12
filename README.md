@@ -1,2 +1,2 @@
 # water_react
-study react
+Study React
