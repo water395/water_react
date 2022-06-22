@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react</title>
+    <!-- 核心库 -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- 操作dom -->
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script type="text/javascript" src="./babel.min.js"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+</body>
+
+<script type="text/babel">
+    class Login extends React.Component {
+        deth = ()=>{
+            ReactDOM.unmountCompoentAtNode(document.getElementById("test"))
+        }
+        state = { opacity : 1 } 
+
+        //组件挂载完毕
+        componentDidMount(){
+          this.timer =  setInterval(()=>{
+                let {opacity} = this.state;
+                opacity -= 0.1
+                if(opacity <= 0) opacity = 1
+                this.setState({opacity:opacity})
+            },200)
+        }
+
+        //render：初始化渲染、状态更新之后
+        render() { 
+            return (
+                <div>
+                    <div style={{opacity:this.state.opacity}}>加油林清泉</div>
+                    <button onClick={this.deth}>开始</button>
+                </div>
+            );
+        }
+
+        //组件将要卸载
+        componentWillUnmount(){
+            clearInterval(this.timer)
+        }
+
+
+    }
+     
+    // export default Login;
+    ReactDOM.render(<Login/>,document.getElementById("test"))
+</script>
+</html>
